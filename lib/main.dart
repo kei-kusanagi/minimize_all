@@ -59,6 +59,15 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 void _minimizeAllWindows() async {
-  final result = await Process.run('powershell',
-      ['-command', '(New-Object -ComObject Shell.Application).MinimizeAll()']);
+  if (Platform.isWindows) {
+    final result = await Process.run('powershell', [
+      '-command',
+      '(New-Object -ComObject Shell.Application).MinimizeAll()'
+    ]);
+  } else if (Platform.isMacOS) {
+    final result = await Process.run('osascript', [
+      '-e',
+      'tell application "System Events"\nset allApps to every application process\nrepeat with thisApp in allApps\nset visible of thisApp to false\nend repeat\nend tell',
+    ]);
+  }
 }
