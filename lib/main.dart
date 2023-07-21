@@ -36,14 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
   var currentDateTime;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    DateTime currentDateTime = DateTime.now();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    DateTime currentDateTime = DateTime.now();
     String formattedTime = DateFormat.Hm().format(currentDateTime);
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Current Time is ${formattedTime}'),
+            Text('Current Time is ${formattedTime!}'),
             ElevatedButton(
               onPressed: () {
                 _minimizeAllWindows();
